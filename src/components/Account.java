@@ -1,11 +1,13 @@
+// 1.2.1 Creation of the Account class
+
 package components;
 
 public abstract class Account {
 	
-	private String label;
-	private double balance = 0;
-	private int accountNumber;
-	private Client client;
+	protected String label;
+	protected double balance = 0;
+	protected int accountNumber;
+	protected Client client;
 	
 	private static int nrOfAccounts = 0;	
 	
