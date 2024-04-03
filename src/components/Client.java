@@ -7,14 +7,14 @@ public class Client {
 	private String firstName = "";
 	private int clientNr;
 	
-	private static int nrClients= 0;	
+	private static int nrOfClients= 0;	
 	
 	public Client (String name, String firstName) {
 		this.name = name;
-		this.firstName = firstName;
-		this.clientNr = Client.nrClients;
+		this.firstName = firstName;		
+		this.clientNr = Client.nrOfClients;
 		
-		Client.nrClients += 1; // this.clientNumber = this.clientNumber + 1;
+		Client.nrOfClients += 1; // this.clientNumber = this.clientNumber + 1;
 	}
 	
 	/**
@@ -58,7 +58,6 @@ public class Client {
 
 
 	public String toString() {
-		/*return "Je suis " + this.firstName + " " + this.name + " e tenho o numero de cliente " + this.clientNr;*/
 		String newLine = System.getProperty("line.separator");
 		
 	    return "Client Nr : " + this.clientNr + ""

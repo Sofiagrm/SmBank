@@ -12,8 +12,31 @@ public class MainTest {
 		clients = loadAndReturnClientTable(5);
 		
 		displayArray(clients);
+		
+		Client cliente = new Client("Moreira", "Sofia");
+		Client cliente1 = new Client("Louro", "João");
+/*		
+		Account conta = new Account("conta a ordem", cliente);
+		Account conta1 = new Account("conta a ordem", cliente);
+
+		System.out.println("Label da conta - " + conta.getLabel());
+		
+		conta.setLabel("conta a prazo");
+		
+		System.out.println("Nova label da conta - " + conta.getLabel());
 	
 		
+		
+		System.out.println("Label da conta - " + conta1.getClient().toString());
+		
+		conta1.setClient(cliente1);
+
+		System.out.println("Label da conta - " + conta1.getClient().toString());
+		
+		System.out.println("Nuemro da conta1 - " + conta1.getaccountNumber());
+		
+		System.out.println(conta1.toString());
+		*/
 	}
 	
 
@@ -22,7 +45,7 @@ public class MainTest {
 		
 		
 		for (int i = 0 ; i < numberOfClients ;  i++) {
-			array_of_clients[i] = new Client("name" + (i+1), "firstname" + (i+1));;
+			array_of_clients[i] = new Client("name" + (i+1), "firstname" + (i+1));
 		}
 
 		return array_of_clients;	
