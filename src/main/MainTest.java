@@ -2,6 +2,9 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Hashtable;
+import java.util.List;
 
 import components.Client;
 import components.CurrentAccount;
@@ -18,14 +21,17 @@ public class MainTest {
 		
 		//with array
         clients = loadAndReturnClientTableArray(5);		
-        displayClientsArray(clients);
+        //displayClientsArray(clients);
         
         //with ArrayList
         clientsList = loadAndReturnClientTableArrayList(5);
-        displayClientsArrayList(clientsList);
+        //displayClientsArrayList(clientsList);
 		
 		accountList = loadAndReturnAccountTableArrayList(5);
-		displayAccountArrayList(accountList);
+		//displayAccountArrayList(accountList);
+		
+		Hashtable<Integer, Account> accountsTable = accountsArrayListtoHashTable(accountList);
+		displayAccountTable(accountsTable);
 		
 		
 		
@@ -117,13 +123,51 @@ public class MainTest {
 	public static void  displayAccountArrayList(ArrayList<Account> array_list_of_accounts) {
 		System.out.println("Account List");
 		
-		System.out.println(array_list_of_accounts.size());
-		
-
+		System.out.println(array_list_of_accounts.size());	
 		
 		for( Account account: array_list_of_accounts) {
 			System.out.println(account.toString());
 		}
 	}
-}
+	
+	public static Hashtable<Integer, Account> accountsArrayListtoHashTable (ArrayList<Account> array_list_of_accounts ) {
+		Hashtable<Integer, Account> accountsTable = new Hashtable<Integer, Account>();	
+		
+		for( Account account: array_list_of_accounts) {
+			accountsTable.put(account.getaccountNumber(), account);
+		}
+		
+		return accountsTable;
+	}
+	
+	public static void displayAccountTable(Hashtable<Integer, Account> accountsTable) {
+		System.out.println("Accounts Table");
+		
+		System.out.println(accountsTable.size());	
+		
+		// Create a synchronized list from the values of accountsTable
+		List<Account> list_of_accounts = Collections.synchronizedList(new ArrayList<>(accountsTable.values()));
 
+		// Sort the list if Account implements Comparable<Account>
+		Collections.sort(list_of_accounts);
+
+		// Assuming displayAccountArrayList method takes an ArrayList<Account> as argument
+		displayAccountArrayList(new ArrayList<>(list_of_accounts));
+		
+		/*
+		String newLine = System.getProperty("line.separator");
+		
+		String print = "Accounts Table".concat(newLine).concat(newLine);		
+		
+		for(Map.Entry<Integer, Account> entry : list_of_accounts.entrySet()) {
+			print.concat("Account Numnber : " + entry.getKey().toString())
+				.concat(newLine)
+				.concat("Account : ")
+				.concat(newLine).concat(newLine)
+				.concat(entry.getValue().toString())
+				.concat(newLine).concat(newLine);			
+
+		}
+		*/
+	}
+}
