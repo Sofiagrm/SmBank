@@ -40,8 +40,8 @@ public abstract class Account implements Comparable<Account>{
 		return this.balance;
 	}
 	
-	public void setBalance (double newBalance) {
-		this.balance = newBalance;
+	public void setBalance (Flow flow) {
+		this.balance = this.balance + flow.getAmount();
 	}
 	
 	public Client getClient () {
