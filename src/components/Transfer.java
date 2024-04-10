@@ -1,21 +1,23 @@
 package components;
 
-public class Transfer extends Flow{
+import java.time.LocalDate;
 
-	private int originAccountNr;
+public class Transfer extends Flow {
+
+	private int issuingAccountNr;
 	
-	Transfer(String comment, double amount, int accountNr, boolean effect, int originAccountNr) {
-		super(comment, amount, accountNr, effect);
+	public Transfer(String comment, double amount, int accountNr, boolean effect, LocalDate date, int issuingAccountNr) {
+		super(comment, amount, accountNr, effect, date);
 		
-		this.setOriginAccountNr(originAccountNr);
+		this.issuingAccountNr = issuingAccountNr;
 	}
 
-	public int getOriginAccountNr() {
-		return originAccountNr;
+	public int getIssuingAccountNr() {
+		return this.issuingAccountNr;
 	}
 
-	public void setOriginAccountNr(int originAccountNr) {
-		this.originAccountNr = originAccountNr;
+	public void setIssuingAccountNr(int issuingAccountNr) {
+		this.issuingAccountNr = issuingAccountNr;
 	}
 
 }

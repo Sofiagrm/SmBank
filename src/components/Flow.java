@@ -1,23 +1,25 @@
 package components;
 
+import java.time.LocalDate;
+
 public abstract class Flow {
 	private String comment = "";
 	private int identifier;
 	private double amount;
 	private int accountNr;
 	private boolean effect;
-	private long date;
+	private LocalDate date;
 	
 	private static int nrOfFlows = 0;
 	
-	Flow (String comment, double amount, int accountNr, boolean effect) {
+	Flow (String comment, double amount, int accountNr, boolean effect, LocalDate date) {
 		this.comment = comment;
 		this.amount = amount;
 		this.accountNr = accountNr;
 		this.effect = effect;
-		this.date = System.currentTimeMillis();
+		this.date = date;
 		
-		this.accountNr = Flow.nrOfFlows;
+		this.identifier = Flow.nrOfFlows;
 		
 		Flow.nrOfFlows += 1;
 	}
@@ -95,15 +97,23 @@ public abstract class Flow {
 	/**
 	 * @return the date
 	 */
-	public long getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
 	/**
 	 * @param date the date to set
 	 */
-	public void setDate(long date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
+
+	@Override
+	public String toString() {
+		return "Flow [comment=" + comment + ", identifier=" + identifier + ", amount=" + amount + ", accountNr="
+				+ accountNr + ", effect=" + effect + ", date=" + date + "]";
+	}
+
+	
 
 }

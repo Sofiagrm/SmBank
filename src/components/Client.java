@@ -60,7 +60,7 @@ public class Client {
 	public String toString() {
 		String newLine = System.getProperty("line.separator");
 		
-	    return "Client Nr : " + this.clientNr + ""
+	    return "  Client Nr : " + this.clientNr + ""
 	    		.concat(newLine)
 	            .concat("  Name : " + this.name)
 	            .concat(newLine)

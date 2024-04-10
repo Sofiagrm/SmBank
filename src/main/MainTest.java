@@ -1,20 +1,29 @@
 // 1.1.2 Creation of the test main class
 package main;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map.Entry;
+import java.util.Optional;
 
 import components.Client;
+import components.Credit;
 import components.CurrentAccount;
+import components.Debit;
+import components.Flow;
 import components.SavingsAccount;
+import components.Transfer;
 import components.Account;
 
 public class MainTest { 
 	public static Client[] clients;
 	public static ArrayList<Client> clientsList = new ArrayList<Client>();
 	public static ArrayList<Account> accountList = new ArrayList<Account>();
+	public static Hashtable<Integer, Account> accountsMap = new Hashtable<Integer, Account>();
+	public static ArrayList<Flow> flowList = new ArrayList<Flow>();
 
 		
 	public static void main (String[] args) {
@@ -30,9 +39,13 @@ public class MainTest {
 		accountList = loadAndReturnAccountTableArrayList(5);
 		//displayAccountArrayList(accountList);
 		
-		Hashtable<Integer, Account> accountsTable = accountsArrayListtoHashTable(accountList);
-		displayAccountTable(accountsTable);
+		accountsMap = accountsArrayListtoHashTable(accountList);
+		//displayAccountTable(accountsMap);
 		
+		flowList = loadDataToFlowArrayList();
+		
+		
+		updateUdateAccountsWithFlows(flowList, accountsMap);
 		
 		
 /*		
@@ -91,10 +104,10 @@ public class MainTest {
 		
 		for (int i = 0 ; i < numberOfAccount ;  i++) {
 			if(i % 2 == 0) {
-				accountListtoReturn.add(new CurrentAccount(new Client("louro", "joao")));	
+				accountListtoReturn.add(new CurrentAccount(new Client("moreira", "sofia")));	
 			}
 			else {
-				accountListtoReturn.add(new SavingsAccount(new Client("louro", "joao")));
+				accountListtoReturn.add(new SavingsAccount(new Client("moreira", "sofia")));
 			}
 		}
 		
@@ -126,12 +139,12 @@ public class MainTest {
 		System.out.println(array_list_of_accounts.size());	
 		
 		for( Account account: array_list_of_accounts) {
-			System.out.println(account.toString());
+			System.out.println(account);
 		}
 	}
 	
 	public static Hashtable<Integer, Account> accountsArrayListtoHashTable (ArrayList<Account> array_list_of_accounts ) {
-		Hashtable<Integer, Account> accountsTable = new Hashtable<Integer, Account>();	
+		Hashtable<Integer, Account> accountsTable = new Hashtable<Integer, Account>();
 		
 		for( Account account: array_list_of_accounts) {
 			accountsTable.put(account.getaccountNumber(), account);
@@ -169,5 +182,63 @@ public class MainTest {
 
 		}
 		*/
+	}
+	
+	public static void displayAccountsMap (Hashtable<Integer, Account> accounts_table) {
+		String newLine = System.getProperty("line.separator");
+		
+		//String print = 
+		System.out.println("Accounts Table".concat(newLine).concat(newLine));
+
+		for(Entry<Integer, Account> entry : accounts_table.entrySet()) {
+			System.out.println(entry.getValue().toString().concat(newLine).concat(newLine));
+		}
+		
+		//System.out.println(print);
+	}
+	
+	
+	public static ArrayList<Flow> loadDataToFlowArrayList() {
+		ArrayList<Flow> flowList = new ArrayList<Flow>();
+		
+		Debit flow_1 = new Debit("debit - 50€ from account nr 1", 50.0, 1, false, LocalDate.now().plusDays(2));
+		flowList.add(flow_1);
+				
+		for(Account a : accountList) {
+			if (CurrentAccount.class == a.getClass()) {
+				Credit flow_2 = new Credit("credit - 100.5€ on account nr " + a.getaccountNumber(), 100.5, a.getaccountNumber(), false, LocalDate.now().plusDays(2));
+				flowList.add(flow_2);				
+			}
+		}
+		
+		for(Account a : accountList) {
+			if (SavingsAccount.class == a.getClass()) {
+				Credit flow_3 = new Credit("credit - 1500€ on account nr " + a.getaccountNumber(), 100.5, a.getaccountNumber(), false, LocalDate.now().plusDays(2));
+				flowList.add(flow_3);				
+			}
+		}
+		
+		Transfer flow_4 = new Transfer("tranfer - 50€€ from account nr 1 to account nr 2", 50.0, 1, false, LocalDate.now().plusDays(2), 2);
+		flowList.add(flow_4);
+		
+		return flowList;
+	}
+	
+	public static void updateUdateAccountsWithFlows(ArrayList<Flow> flow_array, Hashtable<Integer, Account> accounts_table) {
+
+		for(Flow f : flow_array) {
+			System.out.println(f.toString());
+			accounts_table.get(f.getAccountNr()).setBalance(f);
+		}
+		
+		displayAccountsMap(accounts_table);
+		
+
+		Optional<Account> accountWithNegativeBalance = accounts_table.values().stream()
+			.filter(account -> account.getBalance() < 0)
+			.findAny();
+
+		accountWithNegativeBalance.ifPresent(account -> System.out.println("Account " + account.getaccountNumber() + " has a negative balance."));
+		
 	}
 }

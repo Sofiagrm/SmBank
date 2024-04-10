@@ -20,7 +20,7 @@ public abstract class Account implements Comparable<Account>{
 		
 		//generate random balance between 50 and 100
 		Random r = new Random();
-		double randomValue = 50 + (100 - 50) * r.nextDouble();
+		double randomValue = (-200) + (50 - (-200)) * r.nextDouble();
 		this.balance = randomValue;
 		
 		this.accountNumber = Account.nrOfAccounts;
@@ -41,7 +41,20 @@ public abstract class Account implements Comparable<Account>{
 	}
 	
 	public void setBalance (Flow flow) {
-		this.balance = this.balance + flow.getAmount();
+		if(Debit.class == flow.getClass()) {
+			this.balance = this.balance - flow.getAmount();
+		}
+		else if(Credit.class == flow.getClass()) {
+			this.balance = this.balance + flow.getAmount();
+		}
+		else {
+			if (((Transfer)flow).getIssuingAccountNr() == this.accountNumber) {
+				this.balance = this.balance - flow.getAmount();
+			}
+			else if (((Transfer)flow).getAccountNr() == this.accountNumber)  {
+				this.balance = this.balance + flow.getAmount();
+			}
+		}
 	}
 	
 	public Client getClient () {
@@ -91,11 +104,11 @@ public abstract class Account implements Comparable<Account>{
 	    		.concat(newLine)
 	            .concat("Account Label  : " + this.label)
 	            .concat(newLine)
-	            .concat("Owner : ")
+	            .concat("Account Owner : ")
 	            .concat(newLine)
 	            .concat(this.client.toString())
 	            .concat(newLine)
-	            .concat("  balance : " + this.balance)
+	            .concat("  Account balance : " + this.balance)
 	            .concat(newLine)
 	            .concat("--------------------");
 
