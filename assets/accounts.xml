@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<account>
+		<label>Current</label>
+		<client>
+			<name>moreira</name>
+			<firstname>sofia</firstname>
+		</client>
+	</account>
+	<account>
+		<label>Savings</label>
+		<client>
+			<name>moreira</name>
+			<firstname>sofia</firstname>
+		</client>
+	</account>
+	<account>
+		<label>Current</label>
+		<client>
+			<name>moreira</name>
+			<firstname>sofia</firstname>
+		</client>
+	</account>
+	<account>
+		<label>Savings</label>
+		<client>
+			<name>moreira</name>
+			<firstname>sofia</firstname>
+		</client>
+	</account>
+	<account>
+		<label>Current</label>
+		<client>
+			<name>moreira</name>
+			<firstname>sofia</firstname>
+		</client>
+	</account>
+</root>

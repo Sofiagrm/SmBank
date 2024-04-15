@@ -1,0 +1,59 @@
+[
+	{
+		"comment": "debit - 50€ from account nr 1",
+		"amount": 50.0,
+		"accountNr": 1,
+		"effect": false,
+		"date": "2024-04-13",
+		"type": "Debit"
+	},
+	{
+		"comment": "credit - 100.5€ on account nr 0",
+		"amount": 105.5,
+		"accountNr": 0,
+		"effect": false,
+		"date": "2024-04-13",
+		"type": "Credit"
+	},
+	{
+		"comment": "credit - 100.5€ on account nr 2",
+		"amount": 105.5,
+		"accountNr": 2,
+		"effect": false,
+		"date": "2024-04-13",
+		"type": "Credit"
+	},
+	{
+		"comment": "credit - 100.5€ on account nr 4",
+		"amount": 105.5,
+		"accountNr": 4,
+		"effect": false,
+		"date": "2024-04-13",
+		"type": "Credit"
+	},
+	{
+		"comment": "credit - 1500€ on account nr 1",
+		"amount": 1500.0,
+		"accountNr": 1,
+		"effect": false,
+		"date": "2024-04-13",
+		"type": "Credit"
+	},
+	{
+		"comment": "credit - 1500€ on account nr 3",
+		"amount": 1500.0,
+		"accountNr": 3,
+		"effect": false,
+		"date": "2024-04-13",
+		"type": "Credit"
+	},
+	{
+		"comment": "tranfer - 50€€ from account nr 1 to account nr 2",
+		"amount": 50.0,
+		"accountNr": 2,
+		"effect": false,
+		"date": "2024-04-13",
+		"issuingAccountNr": 1,
+		"type": "Transfer"
+	}
+]

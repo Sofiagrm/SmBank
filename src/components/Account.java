@@ -20,12 +20,16 @@ public abstract class Account implements Comparable<Account>{
 		
 		//generate random balance between 50 and 100
 		Random r = new Random();
-		double randomValue = (-200) + (50 - (-200)) * r.nextDouble();
+		double randomValue = (-50) + (50 - (-50)) * r.nextDouble();
 		this.balance = randomValue;
 		
 		this.accountNumber = Account.nrOfAccounts;
 		
 		Account.nrOfAccounts += 1;
+	}
+	
+	public static void resetNrOfAccounts () {
+		Account.nrOfAccounts = 0;
 	}
 	
 	public String getLabel () {
@@ -48,10 +52,10 @@ public abstract class Account implements Comparable<Account>{
 			this.balance = this.balance + flow.getAmount();
 		}
 		else {
-			if (((Transfer)flow).getIssuingAccountNr() == this.accountNumber) {
+			if (this.accountNumber == ((Transfer)flow).getIssuingAccountNr()) {
 				this.balance = this.balance - flow.getAmount();
 			}
-			else if (((Transfer)flow).getAccountNr() == this.accountNumber)  {
+			else if (this.accountNumber == ((Transfer)flow).getAccountNr() )  {
 				this.balance = this.balance + flow.getAmount();
 			}
 		}

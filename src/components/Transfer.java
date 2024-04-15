@@ -19,5 +19,11 @@ public class Transfer extends Flow {
 	public void setIssuingAccountNr(int issuingAccountNr) {
 		this.issuingAccountNr = issuingAccountNr;
 	}
+	
+	public String toString() {
+		String return_string = super.toString();
+		
+		return return_string.substring(0, return_string.length()-1) + ", issuingAccountNr=" + this.issuingAccountNr + "]";
+	}
 
 }
